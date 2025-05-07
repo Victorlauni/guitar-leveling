@@ -27,16 +27,16 @@ const FretCell: FC<FretCellProps> = React.memo(
         e.preventDefault();
         onSelect(stringIndex, fretIndex);
       },
-      [stringIndex, fretIndex, onSelect]
+      [stringIndex, fretIndex, onSelect],
     );
 
     const noteName = useMemo(
       () => getNoteName(openString, fretIndex),
-      [openString, fretIndex]
+      [openString, fretIndex],
     );
     const interval = useMemo(
       () => getInterval(noteName, scaleRoot),
-      [noteName, scaleRoot]
+      [noteName, scaleRoot],
     );
 
     const displayText = useMemo(() => {
@@ -60,7 +60,7 @@ const FretCell: FC<FretCellProps> = React.memo(
         {displayText}
       </div>
     );
-  }
+  },
 );
 
 export default FretCell;

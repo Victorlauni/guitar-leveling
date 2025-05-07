@@ -29,25 +29,25 @@ const FretboardView: FC<FretboardViewProps> = ({
     (stringIndex: number, fretIndex: number) => {
       setSelectedCells((prev) => {
         const isFretAlreadySelected = prev.some(
-          (cell) => cell.string === stringIndex && cell.fret === fretIndex
+          (cell) => cell.string === stringIndex && cell.fret === fretIndex,
         );
         if (isFretAlreadySelected) {
           // If the fret is already selected, remove it from the selection
           return prev.filter(
-            (cell) => !(cell.string === stringIndex && cell.fret === fretIndex)
+            (cell) => !(cell.string === stringIndex && cell.fret === fretIndex),
           );
         }
 
         // Check if the string is already selected
         const isStringAlreadySelected = prev.some(
-          (cell) => cell.string === stringIndex
+          (cell) => cell.string === stringIndex,
         );
         if (isStringAlreadySelected) {
           // If the string is already selected, replace the selection for that string
           return prev.map((cell) =>
             cell.string === stringIndex
               ? { string: stringIndex, fret: fretIndex }
-              : cell
+              : cell,
           );
         } else {
           // Otherwise, add the new selection if the max selection count is not exceeded
@@ -58,7 +58,7 @@ const FretboardView: FC<FretboardViewProps> = ({
         }
       });
     },
-    [strings.length]
+    [strings.length],
   );
 
   const getRootNote = useMemo(() => {
@@ -77,7 +77,8 @@ const FretboardView: FC<FretboardViewProps> = ({
                 const actualFretIndex = fretIndex + startFromFret; // Adjust for skipped frets
                 const isSelected = selectedCells.some(
                   (cell) =>
-                    cell.string === stringIndex && cell.fret === actualFretIndex
+                    cell.string === stringIndex &&
+                    cell.fret === actualFretIndex,
                 );
                 return (
                   <FretCell
@@ -91,7 +92,7 @@ const FretboardView: FC<FretboardViewProps> = ({
                     scaleRoot={getRootNote} // Use the note name as the root for intervals
                   />
                 );
-              }
+              },
             )}
           </div>
         ))}
