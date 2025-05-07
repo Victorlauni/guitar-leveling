@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fretboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.stringRow {
+  display: flex;
+}
+
+.cell {
+  width: 32px;
+  height: 24px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background: #f0f0f0;
+}
+
+.selected {
+  background: #0070f3;
+  border-color: #005bb5;
+}
+
+.infoPanel {
+  margin-top: 12px;
+  font-family: sans-serif;
+}
