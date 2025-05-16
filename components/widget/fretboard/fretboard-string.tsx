@@ -5,16 +5,17 @@ import { getNoteName } from "@/lib/music-theory";
 type FretboardStringProps = {
   numFrets: number;
   tuning: string;
-  useNote?: (note: string | null) => void;
+  useFret?: (fret: number | null) => void;
+  selectedFret?: number | null;
 };
 export default function FretboardString({
   numFrets,
   tuning,
-  useNote,
+  useFret,
 }: FretboardStringProps) {
   const handleClick = (fretIndex: number) => {
-    if (useNote) {
-      useNote(getNoteName(tuning, fretIndex));
+    if (useFret) {
+      useFret(fretIndex);
     }
   };
   return (

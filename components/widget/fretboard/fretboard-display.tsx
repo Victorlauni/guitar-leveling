@@ -16,18 +16,18 @@ export default function FretboardDisplay({
   numFrets = 24,
   tuning = ["E", "A", "D", "G", "B", "E"],
 }: FretboardDisplayProps) {
-  const [selectedNotes, setSelectedNotes] = React.useState<(string | null)[]>(
+  const [selectedFrets, setSelectedFrets] = React.useState<(number | null)[]>(
     Array(numStrings).fill(null)
   );
-  const useNote = (stringNum: number) => {
-    return (note: string | null) => {
-      const newSelectedNotes = [...selectedNotes];
-      if (note === newSelectedNotes[stringNum]) {
-        newSelectedNotes[stringNum] = null;
+  const useFret = (stringNum: number) => {
+    return (fretInd: number | null) => {
+      const newSelectedFrets = [...selectedFrets];
+      if (fretInd === newSelectedFrets[stringNum]) {
+        newSelectedFrets[stringNum] = null;
       } else {
-        newSelectedNotes[stringNum] = note;
+        newSelectedFrets[stringNum] = fretInd;
       }
-      setSelectedNotes(newSelectedNotes);
+      setSelectedFrets(newSelectedFrets);
     };
   };
 
@@ -42,13 +42,14 @@ export default function FretboardDisplay({
             <FretboardString
               numFrets={numFrets}
               tuning={tuning[stringIndex]}
-              useNote={useNote(stringIndex)}
+              useFret={useFret(stringIndex)}
+              selectedFret={selectedFrets[stringIndex]}
             />
           </div>
         ))}
       </div>
       <div>
-        {selectedNotes.map((note, index) => (
+        {selectedFrets.map((note, index) => (
           <div key={index} className="text-center">
             {note !== null ? (
               <span className="text-green-500">{note}</span>

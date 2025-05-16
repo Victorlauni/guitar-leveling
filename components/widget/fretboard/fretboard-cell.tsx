@@ -1,13 +1,20 @@
 import React from "react";
 
+// TODO - implement the props
 type FretboardDisplayProps = {
   key: any;
   isLast: boolean;
+  isSelected?: boolean;
+  isActive?: boolean;
+  displayText?: string;
   onClick?: (e: any) => void;
 };
 export default function FretboardCell({
   key,
   isLast,
+  isSelected,
+  isActive,
+  displayText,
   onClick,
 }: FretboardDisplayProps) {
   return (
