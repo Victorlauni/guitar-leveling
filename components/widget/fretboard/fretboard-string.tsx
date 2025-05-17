@@ -1,30 +1,35 @@
 import React from "react";
 import FretboardCell from "./fretboard-cell";
-import { getNoteName } from "@/lib/music-theory";
+import { useFretboard } from "@/hooks/use-fretboard";
 
 type FretboardStringProps = {
-  numFrets: number;
-  tuning: string;
-  useFret?: (fret: number | null) => void;
-  selectedFret?: number | null;
+  stringIndex: number;
 };
-export default function FretboardString({
-  numFrets,
-  tuning,
-  useFret,
-}: FretboardStringProps) {
+export default function FretboardString({ stringIndex }: FretboardStringProps) {
+  const numFrets = useFretboard((state) => state.fretboard_upper_bound);
+  const fretboardLowerBound = useFretboard(
+    (state) => state.fretboard_lower_bound
+  );
+  const clickFunction = useFretboard((state) => state.setSelectedFret);
   const handleClick = (fretIndex: number) => {
-    if (useFret) {
-      useFret(fretIndex);
-    }
+    clickFunction(stringIndex, fretIndex);
   };
   return (
     <div className="flex flex-grow border-gray-300 items-stretch">
       {Array.from({ length: numFrets }, (_, fretIndex) => (
         <FretboardCell
           key={fretIndex}
+          isFirst={fretIndex === 0}
           isLast={numFrets - 1 <= fretIndex}
           onClick={() => handleClick(fretIndex)}
+          isSelected={
+            useFretboard((state) => state.selected_fret[stringIndex]) ===
+            fretIndex
+          }
+          isMuted={
+            useFretboard((state) => state.selected_fret[stringIndex]) ===
+              null && fretIndex === 0
+          }
         />
       ))}
     </div>
